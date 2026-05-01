@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mindforge.datamask.core.annotation;
+package io.github.freewarelabs.datamask.core.annotation;
 
-import com.mindforge.datamask.core.DataFormatType;
-import com.mindforge.datamask.core.MaskType;
+import io.github.freewarelabs.datamask.core.DataFormatType;
+import io.github.freewarelabs.datamask.core.MaskType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

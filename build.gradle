@@ -40,7 +40,7 @@ publishing {
 tasks.named('jar') {
     manifest {
         attributes(
-                'Automatic-Module-Name': 'com.mindforge.datamask.core',
+                'Automatic-Module-Name': 'io.github.freewarelabs.datamask.core',
                 'License': 'Apache License 2.0'
         )
     }

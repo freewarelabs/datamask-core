@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module com.mindforge.datamask.core {
+module io.github.freewarelabs.datamask.core {
     requires org.apache.commons.lang3;
     requires org.apache.commons.validator;
     requires lombok;
-    exports com.mindforge.datamask.core;
-    exports com.mindforge.datamask.core.annotation;
-    exports com.mindforge.datamask.core.exception;
+    exports io.github.freewarelabs.datamask.core;
+    exports io.github.freewarelabs.datamask.core.annotation;
+    exports io.github.freewarelabs.datamask.core.exception;
 }

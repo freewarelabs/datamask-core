@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mindforge.datamask.core;
+package io.github.freewarelabs.datamask.core;
 
 public enum MaskType {
     FULL_MASKING, SIDE_MASKING, MIDDLE_MASKING;
