@@ -5,7 +5,7 @@ plugins {
     id 'com.github.jk1.dependency-license-report' version '3.1.2'
 }
 
-group = 'com.mindforge'
+group = 'io.github.freewarelabs'
 version = '1.0'
 
 repositories {
