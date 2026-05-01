@@ -1,6 +1,9 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'com.gradleup.nmcp' version '1.4.4'
+    id 'com.gradleup.nmcp.aggregation' version '1.4.4'
+    id 'signing'
     id 'com.github.hierynomus.license' version '0.16.1'
     id 'com.github.jk1.dependency-license-report' version '3.1.2'
 }
@@ -23,6 +26,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.23.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    nmcpAggregation(project(":"))
 }
 
 test {
@@ -30,9 +34,48 @@ test {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "central"
+            url = "https://central.sonatype.com/api/v1/publisher/deployment"
+
+            credentials {
+                username = findProperty("sonatypeUsername")
+                password = findProperty("sonatypePassword")
+            }
+        }
+    }
+
     publications {
         dataMask(MavenPublication) {
             from components.java
+
+            pom {
+                name = 'Your Library Name'
+                description = 'Short description of your library'
+                url = 'https://github.com/freewarelabs/datamask-core.git'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'freewarelabs'
+                        name = 'Sumanth Prabhakar'
+                        email = 'sumanth.prabhakar@gmail.com'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git://github.com/freewarelabs/datamask-core.git'
+                    developerConnection = 'scm:git:ssh://github.com:freewarelabs/datamask-core.git'
+                    url = 'https://github.com/freewarelabs/datamask-core.git'
+                }
+            }
         }
     }
 }
@@ -46,6 +89,24 @@ tasks.named('jar') {
     }
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 license {
     header project.file('LICENSE_HEADER')
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications
+}
+
+nmcpAggregation {
+    centralPortal {
+        username = findProperty("sonatypeUsername")
+        password = findProperty("sonatypePassword")
+        publishingType = "AUTOMATIC"
+    }
 }
