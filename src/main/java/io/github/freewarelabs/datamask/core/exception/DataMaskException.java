@@ -13,8 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mindforge.datamask.core;
+package io.github.freewarelabs.datamask.core.exception;
 
-public enum DataFormatType {
-    TEXT, EMAIL;
+public class DataMaskException extends Exception {
+    public static final String INVALID_CHARACTER_COUNT_EXCEPTION = "The sum of leftCharacterCount '%d' and rightCharacterCount '%d' is greater then input string length '%d'";
+    public static final String INPUT_TEXT_MISSING_EXCEPTION = "The input text to be masked is missing";
+    public static final String INVALID_EMAIL_ADDRESS_EXCEPTION = "The input email address is invalid";
+
+    public DataMaskException(String message) {
+        super(message);
+    }
 }

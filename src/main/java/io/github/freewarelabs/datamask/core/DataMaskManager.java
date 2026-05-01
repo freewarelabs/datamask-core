@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mindforge.datamask.core;
+package io.github.freewarelabs.datamask.core;
 
-import com.mindforge.datamask.core.exception.DataMaskException;
+import io.github.freewarelabs.datamask.core.exception.DataMaskException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 

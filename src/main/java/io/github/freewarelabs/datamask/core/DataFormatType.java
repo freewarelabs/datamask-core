@@ -13,19 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.mindforge.datamask.core;
+package io.github.freewarelabs.datamask.core;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter
-@Builder
-@ToString
-public class MaskInformationDTO {
-    private MaskType maskType;
-    private int leftCharacterCount;
-    private int rightCharacterCount;
-    private String delimiter;
-    private DataFormatType dataFormatType;
+public enum DataFormatType {
+    TEXT, EMAIL;
 }
