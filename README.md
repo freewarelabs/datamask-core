@@ -7,7 +7,6 @@ A Java library for data masking and sensitive information protection.
 - **Multiple Masking Types**: FULL_MASKING, SIDE_MASKING, MIDDLE_MASKING
 - **Email Support**: Masks email addresses while preserving the domain
 - **Delimiter Support**: Handles formatted text like credit card numbers (e.g., `1234-5678-9012-3456`)
-- **Annotation-Based**: Use `@Mask` annotation on fields for declarative masking
 - **Customizable Masking Character**: Configure the character used for masking
 
 ## Masking Types
@@ -24,7 +23,7 @@ A Java library for data masking and sensitive information protection.
 
 ```xml
 <dependency>
-    <groupId>com.mindforge</groupId>
+    <groupId>io.github.freewarelabs</groupId>
     <artifactId>datamask-core</artifactId>
     <version>1.0</version>
 </dependency>
@@ -40,42 +39,46 @@ DataMaskManager manager = new DataMaskManager();
 DataMaskManager manager = new DataMaskManager("#");
 
 // Create masking configuration
-MaskInformationDTO config = new MaskInformationDTO();
-config.setMaskType(MaskType.SIDE_MASKING);
-config.setLeftCharacterCount(2);
-config.setRightCharacterCount(2);
-config.setDataFormatType(DataFormatType.TEXT);
+MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+        .maskType(MaskType.SIDE_MASKING)
+        .dataFormatType(DataFormatType.TEXT)
+        .leftCharacterCount(2)
+        .rightCharacterCount(2).build();
 
 // Mask text
-String result = manager.maskText(config, "1234567890");
+String result = manager.maskText(maskInformationDTO, "1234567890");
 // Result: "**345678**"
 ```
 
 ### Email Masking
 
 ```java
-MaskInformationDTO config = new MaskInformationDTO();
-config.setMaskType(MaskType.MIDDLE_MASKING);
-config.setLeftCharacterCount(1);
-config.setRightCharacterCount(1);
-config.setDataFormatType(DataFormatType.EMAIL);
+MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+        .maskType(MaskType.MIDDLE_MASKING)
+        .dataFormatType(DataFormatType.EMAIL)
+        .leftCharacterCount(1)
+        .rightCharacterCount(1).build();
 
-String result = manager.maskText(config, "user@example.com");
+String result = manager.maskText(maskInformationDTO, "user@example.com");
 // Result: "u**r@example.com"
 ```
 
 ### With Delimiters
 
 ```java
-MaskInformationDTO config = new MaskInformationDTO();
-config.setMaskType(MaskType.SIDE_MASKING);
-config.setLeftCharacterCount(4);
-config.setRightCharacterCount(4);
-config.setDelimiter("-");
+MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+        .maskType(MaskType.SIDE_MASKING)
+        .dataFormatType(DataFormatType.TEXT)
+        .delimiter("-")
+        .leftCharacterCount(4)
+        .rightCharacterCount(4).build();
 
-String result = manager.maskText(config, "1234-5678-9012-3456");
+String result = manager.maskText(maskInformationDTO, "1234-5678-9012-3456");
 // Result: "****-5678-9012-****"
 ```
+### Affect of leftCharacterCount and rightCharacterCount on SIDE_MASKING and MIDDLE_MASKING
+- **In case of SIDE_MASKING leftCharacterCount and rightCharacterCount represents the number of characters to be masked from left and right side
+- **In case of MIDDLE_MASKING leftCharacterCount and rightCharacterCount represents the number of characters to be visible from left and right side
 
 ## Build & Test
 
