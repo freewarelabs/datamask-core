@@ -187,7 +187,7 @@ public class DataMaskManagerUTest {
     }
 
     @Test
-    public void testFullMaskingForEmailWithDelimiter() throws Exception {
+    public void testFullMaskingForEmailWithDelimiter1() throws Exception {
         MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
                 .maskType(MaskType.FULL_MASKING)
                 .dataFormatType(DataFormatType.EMAIL)
@@ -196,6 +196,18 @@ public class DataMaskManagerUTest {
                 .rightCharacterCount(2).build();
 
         assertEquals("****-***@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john-doe@gmail.com"));
+    }
+
+    @Test
+    public void testFullMaskingForEmailWithDelimiter2() throws Exception {
+        MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+                .maskType(MaskType.FULL_MASKING)
+                .dataFormatType(DataFormatType.EMAIL)
+                .delimiter(".")
+                .leftCharacterCount(2)
+                .rightCharacterCount(2).build();
+
+        assertEquals("****.***@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john.doe@gmail.com"));
     }
 
     @Test
@@ -307,7 +319,7 @@ public class DataMaskManagerUTest {
     }
 
     @Test
-    public void testSideMaskingForEmailWithDelimiter() throws Exception {
+    public void testSideMaskingForEmailWithDelimiter1() throws Exception {
         MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
                 .maskType(MaskType.SIDE_MASKING)
                 .dataFormatType(DataFormatType.EMAIL)
@@ -316,6 +328,18 @@ public class DataMaskManagerUTest {
                 .rightCharacterCount(2).build();
 
         assertEquals("**hn-d**@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john-doe@gmail.com"));
+    }
+
+    @Test
+    public void testSideMaskingForEmailWithDelimiter2() throws Exception {
+        MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+                .maskType(MaskType.SIDE_MASKING)
+                .dataFormatType(DataFormatType.EMAIL)
+                .delimiter(".")
+                .leftCharacterCount(2)
+                .rightCharacterCount(2).build();
+
+        assertEquals("**hn.d**@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john.doe@gmail.com"));
     }
 
     @Test
@@ -465,7 +489,7 @@ public class DataMaskManagerUTest {
     }
 
     @Test
-    public void testMiddleMaskingForEmailWithDelimiter() throws Exception {
+    public void testMiddleMaskingForEmailWithDelimiter1() throws Exception {
         MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
                 .maskType(MaskType.MIDDLE_MASKING)
                 .dataFormatType(DataFormatType.EMAIL)
@@ -474,6 +498,18 @@ public class DataMaskManagerUTest {
                 .rightCharacterCount(2).build();
 
         assertEquals("jo**-*oe@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john-doe@gmail.com"));
+    }
+
+    @Test
+    public void testMiddleMaskingForEmailWithDelimiter2() throws Exception {
+        MaskInformationDTO maskInformationDTO = MaskInformationDTO.builder()
+                .maskType(MaskType.MIDDLE_MASKING)
+                .dataFormatType(DataFormatType.EMAIL)
+                .delimiter(".")
+                .leftCharacterCount(2)
+                .rightCharacterCount(2).build();
+
+        assertEquals("jo**.*oe@gmail.com", dataMaskManagerWithDefaultMaskingCharacter.maskText(maskInformationDTO, "john.doe@gmail.com"));
     }
 
     @Test
