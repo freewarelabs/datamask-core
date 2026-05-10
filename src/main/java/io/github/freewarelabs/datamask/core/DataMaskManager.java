@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class DataMaskManager {
     private String maskingCharacter;
@@ -89,9 +90,10 @@ public class DataMaskManager {
 
     private String maskWithDelimiter(final MaskInformationDTO maskInformationDTO, final String text) throws DataMaskException {
         final String inputDelimiter = maskInformationDTO.getDelimiter().trim();
-        final String rawInput = text.replaceAll(inputDelimiter, "");
+        final String escapedInputDelimiter = Pattern.quote(inputDelimiter);
+        final String rawInput = text.replaceAll(escapedInputDelimiter, "");
         final String maskedRawInput = mask(maskInformationDTO, rawInput);
-        final String[] textParts = text.split(inputDelimiter);
+        final String[] textParts = text.split(escapedInputDelimiter);
         final int partsCount = textParts.length;
         final StringBuilder stringBuilder = new StringBuilder();
         int offset = 0;
